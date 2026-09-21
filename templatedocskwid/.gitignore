@@ -1,0 +1,41 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.toc
+
+# Latexmk
+*.dvi
+
+# Bibliography tools
+*-blx.bib
+
+# Temporary editor files
+*~
+*.swp
+*.swo
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+esqueleto relat.png

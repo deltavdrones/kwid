@@ -1,0 +1,20 @@
+\section{Erros e aprendizados PLACEHOLDER}
+
+DO ANO PASSADO:
+
+Ao longo do desenvolvimento do projeto Logan, enfrentamos (a DeltaV como um todo) desafios práticos que exigiram adaptações rápidas, raciocínio crítico e, principalmente, aprendizado contínuo. Cada obstáculo se transformou em uma oportunidade concreta de evolução técnica e metodológica. Soubemos aproveitar os momentos em que conflitamos com resultados não esperados, documentando nossos erros e detalhando o passo a passo de resolução de cada problema. No setor de sistemas embarcados, estes foram alguns dos problemas que foram de fato ‘racha-cucas', mas que geraram aprendizados para nossa equipe:
+
+\begin{itemize}
+    \item \textbf{Bad GPS:} \textit{"GPS glitch / Compass error"} \\ Um problema inesperado no Mission Planner, relacionado a um failsafe de GPS, se tornou um grande obstáculo para nós, pois o sistema nos alertava que a posição detectada pelo GPS não coincidia com a estimada pela Unidade de Medida Inercial (IMU), gerando uma enorme dor de cabeça devido à nossa inexperiência com o Filtro de Kalman Estendido (EKF). Esse algoritmo crucial para estimar a posição, velocidade e orientação angular do drone com base nas medições da IMU não conseguia integrar seus valores com os dados do GPS, e essa falha de fusão de dados, configurando um erro pré-voo (pre-flight), impedia o voo e foi o maior erro que não poderíamos ter cometido, pois decretou nossa "falha" na Eletroquad, impedindo-nos de decolar na arena devido à nossa inexperiência em lidar com essa questão.
+    
+    \item\textbf{Inconstância de documentação:} Com a correria 
+    \end{itemize}
+
+Alguns dos principais aprendizados do setor de sistemas embarcados incluem:
+\begin{itemize}
+    \item \textbf{Layout físico limitado:} A organização interna dos componentes foi um desafio recorrente. O espaço disponível se mostrou insuficiente, exigindo múltiplas reconfigurações no layout. Essa experiência reforçou a importância de projetar com base em modularidade e escalabilidade, priorizando também a manutenção e o acesso físico aos elementos críticos.
+    \item \textbf{Validação em etapas menores:} Em alguns momentos, realizaram-se testes em blocos muito grandes, o que dificultou a identificação de falhas. A equipe aprendeu a testar em etapas menores, validando cada parte de forma isolada antes de integrá-la ao sistema completo. Essa abordagem trouxe mais confiança e agilidade no processo de verificação.
+    \item \textbf{Tratamento de erro:} Cada desafio foi visto não como um obstáculo, mas como uma oportunidade para refinar as habilidades. Adotou-se a metodologia de "errar, aprender e corrigir" em cada fase do projeto, não apenas para resolver problemas imediatos, mas para transformar cada experiência em um passo de evolução no processo de trabalho. Essa estratégia garantiu que, a cada dificuldade, a equipe saísse mais preparada, com soluções mais robustas e um método cada vez mais eficiente.
+    \item \textbf{EKF e Interferência Eletromagnética:} O failsafe de GPS, causado pela discrepância entre a IMU e o GPS, foi decisivo para nossa falha na competição. A falta de domínio do Extended Kalman Filter (EKF), responsável pela fusão dos dados de navegação, impediu a correção pré-voo. Estimamos com 75\% de confiança que o indutor do regulador de tensão gerou interferência eletromagnética no compasso, corrompendo leituras e invalidando o EKF, bloqueando o armamento do drone. O episódio reforça a necessidade de entender profundamente o EKF e projetar blindagens contra interferências em componentes críticos.
+
+\end{itemize}

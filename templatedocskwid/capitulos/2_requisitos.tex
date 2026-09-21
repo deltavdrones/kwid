@@ -1,0 +1,51 @@
+\section{Requisitos de Projeto}
+
+\subsection{Requisitos do regulamento}
+
+O projeto do sistema embarcado foi desenvolvido em conformidade com o Regulamento da Competição EletroQuad SAE BRASIL -- AXIA Energia 2026. Nele, foram considerados como requisitos mandatórios: a adoção de uma aeronave do tipo quadrotor com frame classe S500; o uso de quatro motores brushless idênticos; quatro ESCs compatíveis; bateria embarcada; hardware compatível com PX4 ou ArduPilot; enlace de telemetria entre controladora e estação de solo; voltímetro com indicação visível da tensão de cada bateria; e dispositivo de fácil acesso para energização e desenergização da aeronave.
+
+Quanto ao sensoriamento, essência do setor relatado, o regulamento limita os sensores de navegação a acelerômetros, giroscópios, magnetômetros, barômetros, GPS convencional, câmera monocular e um único sensor de altitude e movimento relativo apontado para o solo, desde que pertencente à lista de sensores permitidos. Além disso, sistemas RTK não são aceitos, o que impôs à equipe a necessidade de extrair o máximo desempenho na fusão entre os dados do GPS, da IMU e do sensor de fluxo óptico para obtermos uma boa visão computacional.
+
+Também foram observadas as restrições referentes à política de conectividade da aeronave, à obrigatoriedade de estação de solo utilizando Mission Planner ou QGroundControl, às camadas obrigatórias de segurança e à necessidade de compatibilidade integral entre o projeto descrito no relatório e a aeronave apresentada presencialmente.
+
+\subsection{Requisitos funcionais}
+
+Com base nas missões propostas para a competição e na arquitetura efetivamente adotada pela equipe, o sistema embarcado deve atender aos seguintes requisitos funcionais:
+
+\begin{itemize}
+    \item Realizar armamento, decolagem, voo pairado, deslocamento horizontal, variação de altitude e pouso de forma comandada e segura;
+    \item Manter telemetria bidirecional com a estação de solo para acompanhamento do estado da aeronave, envio de comandos e monitoramento de variáveis críticas;
+    \item Integrar controladora de voo, computador de bordo, sensores e atuadores em uma arquitetura única, permitindo operação manual assistida e operação autônoma;
+    \item Processar dados visuais em tempo real, extraindo informações espaciais relevantes para a tomada de decisão das missões;
+    \item Converter eventos de percepção em comandos de navegação por meio de uma camada de software responsável por encapsular mensagens MAVLink;
+    \item Executar lógicas de missão baseadas em máquina de estados, garantindo coerência entre percepção, decisão e atuação;
+    \item Registrar dados operacionais e disponibilizar logs para análise pós-voo, validação de desempenho e depuração de falhas.
+\end{itemize}
+
+\subsection{Requisitos não funcionais}
+
+Além das funções operacionais, o sistema embarcado foi projetado para satisfazer requisitos não funcionais diretamente associados à confiabilidade em competição:
+
+\begin{itemize}
+    \item \textbf{Confiabilidade:} a arquitetura deve permanecer operacional sob vibração, ruído eletromagnético, variações de carga e perturbações inerentes ao voo, sem comprometer as funções críticas de estabilização e navegação.
+    \item \textbf{Segurança operacional:} comandos autônomos devem respeitar condições de armamento, altitude, bateria e estados válidos de voo, impedindo transições inconsistentes.
+    \item \textbf{Baixa latência:} o ciclo entre percepção visual, processamento e envio de comando deve ser compatível com navegação em malha fechada, evitando perda de alinhamento dos alvos.
+    \item \textbf{Modularidade:} hardware e software devem permitir substituição, teste e validação por subsistemas, reduzindo a complexidade de integração e manutenção.
+    \item \textbf{Compatibilidade eletromagnética:} a disposição física e elétrica dos módulos deve minimizar acoplamento indesejado entre linhas de potência, reguladores, antenas e sensores sensíveis.
+    \item \textbf{Eficiência energética e massa:} a seleção dos componentes deve preservar autonomia de voo e respeitar as limitações de massa e volume impostas pela aeronave e pelo regulamento.
+\end{itemize}
+
+\subsection{Restrições de projeto}
+
+O desenvolvimento do sistema embarcado foi condicionado por restrições práticas de hardware, software e integração física. O computador de bordo adotado, uma Raspberry Pi 5, impõe limites de processamento e memória que influenciam diretamente a escolha dos algoritmos embarcados, favorecendo modelos leves de inferência e rotinas clássicas de visão computacional em tarefas de precisão geométrica.
+
+No domínio de software, a integração com a controladora de voo via DroneKit definiu a padronização do ambiente em Python 3.9, restringindo versões de bibliotecas e exigindo controle rigoroso de dependências. Além disso, a arquitetura deveria operar em tempo real suficiente para manter o fechamento da malha percepção--ação durante o voo.
+
+Do ponto de vista físico, o volume interno do frame, a distribuição de massa e a proximidade entre módulos de potência e sensores sensíveis limitaram a liberdade de arranjo dos componentes. Essa condição tornou indispensável o planejamento do layout com foco simultâneo em acessibilidade, centro de massa, dissipação e compatibilidade eletromagnética.
+
+\subsection{Camadas de segurança regulamentares}
+
+A arquitetura embarcada do Logan foi definida em conformidade com as exigências de segurança operacional da competição, incorporando camadas de proteção voltadas à mitigação de falhas de telemetria, comandos inconsistentes e violações dos limites de voo.
+
+A primeira camada está associada ao código embarcado, capaz de interromper a missão e comandar o pouso vertical quando necessário. A segunda é formada pela estação de solo, responsável pelo monitoramento do voo e pela intervenção operacional. A terceira corresponde aos mecanismos nativos da controladora de voo, como failsafe e geofence. Em conjunto, essas camadas garantem que a operação autônoma respeite estados válidos de voo, limites de altitude e critérios mínimos de segurança energética.
+ 

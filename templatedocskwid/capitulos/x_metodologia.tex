@@ -1,0 +1,27 @@
+\section{Metodologia}
+\subsection{Desenvolvimento do projeto}
+O desenvolvimento geral do Logan foi executado com base nos requisitos que foram estabelecidos no Regulamento da Competição EletroQuad SAE BRASIL – AXIA Energia 2026, o qual impunha restrições técnicas para a execução do projeto. A Unidade de Controle e Energia (UCE-Logan) teve seu desenvolvimento conduzido, majoritariamente, com base em estudos e análises realizados após os resultados da última competição. Desde o início, sabemos que havia se priorizado uma boa avaliação das melhores opções de sistemas e subsistemas eletroeletrônicos, e assim decidimos que não iríamos investir muito em novos componentes, o que poderia gerar despesas desnecessárias e comprometer, de forma indireta, a viabilidade do projeto como um todo.
+
+Sendo assim, a abordagem adotada foi centrada em requisitos reais de operação, definidos em conjunto com os setores de controle e visão computacional e estruturas. A prioridade era clara: fornecer energia de forma estável, segura e com margem para picos de corrente, sem comprometer o peso, o espaço e as limitações técnicas dos sistemas embarcados. Isso exigiu não apenas o dimensionamento cuidadoso do frame, mas também uma visão estratégica sobre como os módulos se conectariam física e eletricamente dentro do drone.
+
+Essa abordagem permitiu alinhar segurança, desempenho e eficiência, com decisões respaldadas por dados experimentais, medições precisas e literatura técnica. O resultado é uma arquitetura elétrica que dialoga diretamente com as demandas dos demais setores, assegurando confiabilidade e segurança para o drone.
+
+\subsection {Ferramentas utilizadas:}
+\begin {itemize}
+\item \textbf{KiCad} \\ Software open source, mais apropriadamente um Computer-Aided Design (CAD) voltado para eletrônica que permite criar esquemáticos completos e projetar placas de circuito impresso (PCBs);
+
+\item \textbf {LTspice} \\
+Simulador de circuitos eletrônicos de alto desempenho, baseado em SPICE, que permite validar o comportamento de projetos analógicos através de análises de transientes, frequência e ponto de operação DC antes da montagem física;
+
+\item \textbf{Multímetro e Wattímetro de Modelismo} \\ Fundamentais para testes de bancada, validação das correntes reais dos motores, verificação de quedas de tensão nos cabos e aferição do bom funcionamento do Battery Eliminator Circuit (BEC) dos Electronic Speed Controllers (ESCs);
+
+\item \textbf{Fonte de Bancada} \\ Utilizada como fonte regulada para testes individualizados dos componentes elétricos. Foi essencial para validar o funcionamento dos ESCs, motores e da controladora sem depender da bateria principal. Sua estabilidade e proteção contra sobrecorrente permitiram detectar falhas de consumo e garantir a segurança durante os testes em bancada;
+
+\item \textbf{Osciloscópio} \\
+Utilizado para análise dos sinais elétricos durante os testes em bancada. Foi essencial para comprovar a presença e a integridade dos sinais PWM enviados pela Pixhawk aos ESCs, validando o acionamento correto das fases dos motores. Sua alta taxa de amostragem e resolução facilitaram a identificação de possíveis distorções ou falhas na comunicação entre a controladora e os atuadores;
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=0.7\textwidth]{imagens/motor.jpg}
+     \caption{Demonstração de uso do osciloscópio, monitorando duas fases do motor BLDC}
+ \end{figure}
